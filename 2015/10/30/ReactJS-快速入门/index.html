@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React,Getting Started," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="React 是近期非常热门的一个前端开发框架。 这篇文章将介绍如何使用 React 来创建用户界面，希望能够起到抛砖引玉的效果。 相对于其他框架来说，React 提供了非常少的 API， 如同 Gulp， 越是少量的 API 同时意味着越多的可能性。 正如那句名言所说：  Less is more.  但是，精简的 API 不是意味着没有一定的学习成本，我们还是需要对此框架进行一定的理解。 闲话不">
+<meta name="keywords" content="React,Getting Started">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactJS 快速入门">
+<meta property="og:url" content="http://yoursite.com/2015/10/30/ReactJS-快速入门/index.html">
+<meta property="og:site_name" content="Lavenkin&#39;s Notes">
+<meta property="og:description" content="React 是近期非常热门的一个前端开发框架。 这篇文章将介绍如何使用 React 来创建用户界面，希望能够起到抛砖引玉的效果。 相对于其他框架来说，React 提供了非常少的 API， 如同 Gulp， 越是少量的 API 同时意味着越多的可能性。 正如那句名言所说：  Less is more.  但是，精简的 API 不是意味着没有一定的学习成本，我们还是需要对此框架进行一定的理解。 闲话不">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-13T02:13:36.229Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactJS 快速入门">
+<meta name="twitter:description" content="React 是近期非常热门的一个前端开发框架。 这篇文章将介绍如何使用 React 来创建用户界面，希望能够起到抛砖引玉的效果。 相对于其他框架来说，React 提供了非常少的 API， 如同 Gulp， 越是少量的 API 同时意味着越多的可能性。 正如那句名言所说：  Less is more.  但是，精简的 API 不是意味着没有一定的学习成本，我们还是需要对此框架进行一定的理解。 闲话不">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/10/30/ReactJS-快速入门/"/>
+
+
+
+
+
+  <title>ReactJS 快速入门 | Lavenkin's Notes</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lavenkin's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学无止境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/30/ReactJS-快速入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lavenkin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fkfnxn54baj3074074q35.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lavenkin's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ReactJS 快速入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-30T15:17:02+08:00">
+                2015-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://facebook.github.io/react/" target="_blank" rel="external">React</a> 是近期非常热门的一个前端开发框架。 这篇文章将介绍如何使用 React 来创建用户界面，希望能够起到抛砖引玉的效果。</p>
+<p>相对于其他框架来说，React 提供了非常少的 API， 如同 <a href="http://gulpjs.com/" target="_blank" rel="external">Gulp</a>， 越是少量的 API 同时意味着越多的可能性。 正如那句名言所说：</p>
+<blockquote>
+<p>Less is more.</p>
+</blockquote>
+<p>但是，精简的 API 不是意味着没有一定的学习成本，我们还是需要对此框架进行一定的理解。 闲话不多说，让我们进入正题。首先，让我们来了解下 React 中使用到的一些术语。</p>
+<p><a id="more"></a></p>
+<h2 id="React-术语"><a href="#React-术语" class="headerlink" title="React 术语"></a><a href="#React-术语" title="React 术语"></a>React 术语</h2><table><br><thead><br><tr><br><th>术语</th><br><th>解释</th><br></tr><br></thead><br><tbody><br><tr><br><td>React Elements</td><br><td>代表 HTML 元素的 JavaScript 对象。 这些 JavaScript 对象最后被编译成对应的 HTML 元素</td><br></tr><br><tr><br><td>Components</td><br><td>封装 React Elements， 包含一个或者多个 React Elements。 Components 用于创建可以复用的 UI 模块，例如 分页，侧栏导航等</td><br></tr><br><tr><br><td>JSX</td><br><td>JSX 是 React 定义的一种 JavaScript 语法扩展，类似于 XML 。 JSX 是可选的， 我们完全可以使用 JavaScript 来编写 React 应用， 不过 JSX 提供了一套更为简便的方式来写 React 应用</td><br></tr><br><tr><br><td>Virtual DOM</td><br><td>Virtual DOM 是一个模拟 DOM 树的 JavaScript 对象。 React 使用 Virtual DOM 来渲染 UI， 同时监听 Virtual DOM 上数据的变化并自动迁移这些变化到 UI 上</td><br></tr><br></tbody><br></table>
+
+<h2 id="DEMO-环境准备"><a href="#DEMO-环境准备" class="headerlink" title="DEMO 环境准备"></a><a href="#DEMO-环境准备" title="DEMO 环境准备"></a>DEMO 环境准备</h2><p>首先，在 <a href="http://facebook.github.io/react/downloads.html" target="_blank" rel="external">React Download 页面</a> 下载 Starter Kit，解压到某个地方。</p>
+<p>进入到解压后的 <code>build</code> 目录，新建一个 <code>index.html</code> 文件，并且引用 <code>react.js</code> 和 <code>JSXTransformer.js</code> 后就可以开始编写 React 应用了。需要注意如果使用 JSX， 那么 <code>script</code> 标签的 <code>type</code> 应该更改为 <code>text/jsx</code>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">“utf-8”</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">“react.js”</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">“JSXTransformer.js”</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">“text/jsx”</span> <span class="attr">src</span>=<span class="string">“app.js”</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<h2 id="第一个-React-Element"><a href="#第一个-React-Element" class="headerlink" title="第一个 React Element"></a><a href="#第一个-React-Element" title="第一个 React Element"></a>第一个 React Element</h2><p>创建一个 Element 只需调用 <code>React.createElement</code> 方法，并传入元素信息即可。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> div = React.createElement(<span class="string">‘div’</span>, <span class="literal">null</span>, <span class="string">“Hello React”</span>);</div><div class="line"></div><div class="line"><span class="comment">// 使用 JSX</span></div><div class="line"><span class="keyword">var</span> div = <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello React<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div></pre></td></tr></table></figure>
+
+<p>创建之后就可以调用 <code>React.render</code> 方法渲染到页面上：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">React</span><span class="selector-class">.render</span>(<span class="selector-tag">div</span>, <span class="selector-tag">document</span><span class="selector-class">.body</span>);</div></pre></td></tr></table></figure>
+
+<h2 id="第一个-React-Component"><a href="#第一个-React-Component" class="headerlink" title="第一个 React Component"></a><a href="#第一个-React-Component" title="第一个 React Component"></a>第一个 React Component</h2><p>React Component 抽象出相同 UI 组件的结构和逻辑。 通过调用 <code>React.createClass</code> 方法来创建一个 Component，并传入一个带有 <code>render</code> 方法的对象类型的参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> HelloMessage = React.createClass(&#123;</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="name">HelloMessage</span> <span class="attr">name</span>=<span class="string">“iissnan”</span> /&gt;</span>, document.body);</span></div></pre></td></tr></table></figure>
+
+<p>我们看到 <code>React.createClass</code> 接收了一个对象，并将这个方法返回赋值给 <code>HelloMessage</code>， 最后调用 <code>React.render</code> 方法将这个新建的 Component 渲染到页面上。从这个例子看来，一个 Component 与 Element 并无太大的差别。 事实上， Component 已经准备好了，我们可以增添一些结构和功能来扩展这个 Component 。</p>
+<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a><a href="#Props" title="Props"></a>Props</h2><p>在上一个例子中，可以看到有一个特殊的引用： <code>this.props.name</code>。 这个引用称之为 <code>Props</code>，可以将他想象成 Component 的设置选项。</p>
+<p>在使用上， <code>Props</code> 类似于 HTML 中的属性：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.render(&lt;HelloMessage name=<span class="string">“foo”</span> /&gt;, document.<span class="keyword">body</span>);</div></pre></td></tr></table></figure>
+
+<p>在 Component 内部，通过 <code>this.props.name</code> 来引用这个 <code>Props</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> HelloMessage = React.createClass(&#123;</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+<p>需要注意的是， Props 仅用来定制 Component， 这些数据不应该被改动。 如果涉及到需要做改动的数据， 得考虑使用 <code>state</code>。</p>
+<h2 id="Stateful-Component"><a href="#Stateful-Component" class="headerlink" title="Stateful Component"></a><a href="#Stateful-Component" title="Stateful Component"></a>Stateful Component</h2><p>State 数据代表 Component 的状态， 用于维护 Component 内部的状态。 当 State 发生改变之后， React 将会重新渲染 UI 。调用 与 <code>Props</code> 类似， State 数据通过 <code>this.state</code> 访问：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Greeting = React.createClass(&#123;</div><div class="line">  <span class="attr">getInitialState</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">greeted</span>: <span class="literal">false</span> &#125;;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">greet</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.setState(&#123;</div><div class="line">      <span class="attr">greeted</span>: <span class="literal">true</span></div><div class="line">    &#125;);</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> response = <span class="keyword">this</span>.state.greeted ? <span class="string">‘Hi’</span> : <span class="string">‘’</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;response&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.greet&#125;</span>&gt;</span>Hi<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="name">Greeting</span> <span class="attr">name</span>=<span class="string">“foo”</span> /&gt;</span>, document.body);</span></div></pre></td></tr></table></figure>
+
+<p>这个例子中加了几个函数，我们一一来看下。 首先是 <code>getInitialState</code> ， 这个方法在 Component 初始化的时候被调用， 返回 Component 初始时的状态数据。例子中，我们设置了 Component 初始时的 <code>greeted</code> 为 <code>false</code>。<br>然后是 <code>greet</code> 方法，这个方法被调用之后将修改状态数据 <code>greeted</code> 为 <code>true</code>。</p>
+<p>当 State 发生改变后， React 将 Component 渲染到 Virtual DOM，新的 Virtual DOM 与 旧版本的进行比对，检查出改变的部分并更新浏览器的 DOM。 在这个例子中，当按钮被点击后， <code>greeted</code>状态数据发生了变化，UI 跟随着更新。</p>
+<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a><a href="#组合" title="组合"></a>组合</h2><p>结合 Props 和 State，我们就可以使用 Component 来创建完整的应用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Greeting = React.createClass(&#123;</div><div class="line">  <span class="attr">getInitialState</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">greeted</span>: <span class="literal">false</span> &#125;;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">greet</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.setState(&#123;</div><div class="line">      <span class="attr">greeted</span>: <span class="literal">true</span></div><div class="line">    &#125;);</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> response = <span class="keyword">this</span>.state.greeted ? <span class="string">‘Hi’</span> : <span class="string">‘’</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;response&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.greet&#125;</span>&gt;</span>Hi<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">var</span> users = [<span class="string">“foo”</span>, <span class="string">“bar”</span>, <span class="string">“baz”</span>];</div><div class="line"></div><div class="line"><span class="keyword">var</span> GreetingApp = React.createClass(&#123;</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> greetings = <span class="keyword">this</span>.props.users.map(<span class="function"><span class="keyword">function</span> (<span class="params">user</span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> &lt;Greeting name=&#123;user&#125; /&gt;;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    return &lt;div&gt;&#123;greetings&#125;&lt;/div&gt;;</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">React.render(&lt;GreetingApp users=&#123;users&#125; /&gt;, document.body);</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/Getting-Started/" rel="tag"># Getting Started</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/27/Flipboard-60-FPS-on-the-mobile-web/" rel="next" title="Flipboard - 60 FPS on the mobile web">
+                <i class="fa fa-chevron-left"></i> Flipboard - 60 FPS on the mobile web
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/30/聊聊-NexT-主题/" rel="prev" title="聊聊 NexT 主题">
+                聊聊 NexT 主题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws3.sinaimg.cn/large/006tNbRwgy1fkfnxn54baj3074074q35.jpg"
+                alt="Lavenkin" />
+            
+              <p class="site-author-name" itemprop="name">Lavenkin</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/lavenkin" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="qq:479245760@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-术语"><span class="nav-number">1.</span> <span class="nav-text">React 术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEMO-环境准备"><span class="nav-number">2.</span> <span class="nav-text">DEMO 环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个-React-Element"><span class="nav-number">3.</span> <span class="nav-text">第一个 React Element</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个-React-Component"><span class="nav-number">4.</span> <span class="nav-text">第一个 React Component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Props"><span class="nav-number">5.</span> <span class="nav-text">Props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stateful-Component"><span class="nav-number">6.</span> <span class="nav-text">Stateful Component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合"><span class="nav-number">7.</span> <span class="nav-text">组合</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lavenkin</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>

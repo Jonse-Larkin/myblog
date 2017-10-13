@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Atom,编辑器," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这个周末试用 GitHub 的 Atom 编辑器编写一个WEB项目，感觉非常好用。 Atom 的社区很繁荣，有着丰富的扩展/插件（packages）。安装 Atom 的 Package 非常简单，可以在编辑器的偏好设置里面安装，也可以在命令行中使用 apm 命令来安装。 在介绍适用于 WEB 开发的 Package 之前，让我们快速过下如何安装 Atom Packages。  安装 Atom Pa">
+<meta name="keywords" content="Atom,编辑器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="适用于 WEB 开发者的 Atom 编辑器 Package">
+<meta property="og:url" content="http://yoursite.com/2015/10/20/适用于-WEB-开发者的-Atom-编辑器-Package/index.html">
+<meta property="og:site_name" content="Lavenkin&#39;s Notes">
+<meta property="og:description" content="这个周末试用 GitHub 的 Atom 编辑器编写一个WEB项目，感觉非常好用。 Atom 的社区很繁荣，有着丰富的扩展/插件（packages）。安装 Atom 的 Package 非常简单，可以在编辑器的偏好设置里面安装，也可以在命令行中使用 apm 命令来安装。 在介绍适用于 WEB 开发的 Package 之前，让我们快速过下如何安装 Atom Packages。  安装 Atom Pa">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/uploads/install-atom-packages.png">
+<meta property="og:image" content="http://yoursite.com/uploads/atom-autocomplete-plus.gif">
+<meta property="og:image" content="http://yoursite.com/uploads/atom-javascript-snippets.gif">
+<meta property="og:image" content="http://yoursite.com/uploads/atom-jshint.png">
+<meta property="og:image" content="http://yoursite.com/uploads/atom-csslint.png">
+<meta property="og:image" content="http://yoursite.com/uploads/atom-git-plus.gif">
+<meta property="og:image" content="http://yoursite.com/uploads/atom-minimap.png">
+<meta property="og:updated_time" content="2017-10-13T02:13:36.229Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="适用于 WEB 开发者的 Atom 编辑器 Package">
+<meta name="twitter:description" content="这个周末试用 GitHub 的 Atom 编辑器编写一个WEB项目，感觉非常好用。 Atom 的社区很繁荣，有着丰富的扩展/插件（packages）。安装 Atom 的 Package 非常简单，可以在编辑器的偏好设置里面安装，也可以在命令行中使用 apm 命令来安装。 在介绍适用于 WEB 开发的 Package 之前，让我们快速过下如何安装 Atom Packages。  安装 Atom Pa">
+<meta name="twitter:image" content="http://yoursite.com/uploads/install-atom-packages.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/10/20/适用于-WEB-开发者的-Atom-编辑器-Package/"/>
+
+
+
+
+
+  <title>适用于 WEB 开发者的 Atom 编辑器 Package | Lavenkin's Notes</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lavenkin's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学无止境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/20/适用于-WEB-开发者的-Atom-编辑器-Package/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lavenkin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fkfnxn54baj3074074q35.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lavenkin's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">适用于 WEB 开发者的 Atom 编辑器 Package</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-20T13:33:42+08:00">
+                2015-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这个周末试用 <a href="https://github.com" target="_blank" rel="external">GitHub</a> 的 <a href="https://atom.io/" target="_blank" rel="external">Atom</a> 编辑器编写一个WEB项目，感觉非常好用。 Atom 的社区很繁荣，有着丰富的扩展/插件（<a href="https://atom.io/packages" target="_blank" rel="external">packages</a>）。安装 Atom 的 Package 非常简单，可以在编辑器的偏好设置里面安装，也可以在命令行中使用 <code>apm</code> 命令来安装。</p>
+<p>在介绍适用于 WEB 开发的 Package 之前，让我们快速过下如何安装 Atom Packages。</p>
+<p><a id="more"></a></p>
+<h2 id="安装-Atom-Package"><a href="#安装-Atom-Package" class="headerlink" title="安装 Atom Package"></a><a href="#安装-Atom-Package" title="安装 Atom Package"></a>安装 Atom Package</h2><h3 id="通过偏好设置安装-Package"><a href="#通过偏好设置安装-Package" class="headerlink" title="通过偏好设置安装 Package"></a><a href="#通过偏好设置安装-Package" title="通过偏好设置安装 Package"></a>通过偏好设置安装 Package</h3><p>使用快捷键 <code>command + ,</code>/<code>ctrl + ,</code> 打开偏好设置。点击左侧的 <code>Install</code> 即可浏览线上的 Package 。 顶部是一个搜索框，可以搜索已经发布在 <a href="http://atom.io/http://atom.io/packages" target="_blank" rel="external">atom.io</a> 上的 Package ；紧接着是 <code>Feature Packages</code>，即精选的 Package ，列出来的是一些比较优质的 Package 。</p>
+<p><img src="/uploads/install-atom-packages.png" alt="Install atom packages"></p>
+<h3 id="通过-apm-命令安装-Package"><a href="#通过-apm-命令安装-Package" class="headerlink" title="通过 apm 命令安装 Package"></a><a href="#通过-apm-命令安装-Package" title="通过 apm 命令安装 Package"></a>通过 <code>apm</code> 命令安装 Package</h3><p>Atom 自带了一个 <code>apm</code> 的 Package 管理工具。我们可以在命令行下执行以下命令来确认 <code>apm</code> 是否已经安装：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apm <span class="keyword">help</span> <span class="keyword">install</span></div></pre></td></tr></table></figure>
+
+<p>命令之后应该输出 <code>apm install</code> 的详细信息。如果输出不是 <code>apm install</code> 的命令信息，打开 Atom 菜单，选择 <code>Install Shell Commands</code> 来安装 <code>atom</code> 和 <code>apm</code> 。</p>
+<p>确认 <code>apm</code> 正确安装后，便可以开始安装 Package 。正如上述执行 <code>apm help install</code> 所提示的，安装的命令是：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apm <span class="keyword">install</span> [&lt;package_name&gt;…]</div><div class="line">apm <span class="keyword">install</span> &lt;package_name&gt;@&lt;package_version&gt;</div><div class="line">apm <span class="keyword">install</span> <span class="comment">–packages-file my-packages.txt</span></div></pre></td></tr></table></figure>
+
+<h2 id="Package-推荐"><a href="#Package-推荐" class="headerlink" title="Package 推荐"></a><a href="#Package-推荐" title="Package 推荐"></a>Package 推荐</h2><h3 id="快捷输入类"><a href="#快捷输入类" class="headerlink" title="快捷输入类"></a><a href="#快捷输入类" title="快捷输入类"></a>快捷输入类</h3><ul>
+<li><p><a href="https://atom.io/packages/autocomplete-plus" target="_blank" rel="external">autocomplete-plus</a>，当输入的时候，提供可能的候选项。</p>
+<p><img src="/uploads/atom-autocomplete-plus.gif" alt="autocomplete plus"></p>
+</li>
+<li><p><a href="https://atom.io/packages/atom-ctags" target="_blank" rel="external">atom-ctags</a>，使用 <code>ctags</code> 来强化自动完成功能，需借助于 <code>autocomplete-plus</code>。</p>
+</li>
+<li><p><a href="https://atom.io/packages/javascript-snippets" target="_blank" rel="external">javascript-snippets</a>，顾名思义，输入特殊的字符后自动扩展成对应的代码片段。</p>
+<p><img src="/uploads/atom-javascript-snippets.gif" alt="javascript-snippets"></p>
+</li>
+<li><p><a href="https://atom.io/packages/vim-mode" target="_blank" rel="external">vim-mode</a></p>
+<p>VIM-Mode 支持在 Atom 中使用 <code>VIM</code> 编辑器的操作方式来编辑。这对我来说是个非常 Killer 的 Package ，在此之前我一直在 WebStorm 上通过一个插件模拟 VIM 操作，异常难用。而在 Atom 上的这个模拟VIM操作，使用起来感觉还是比较顺手的。你可以混合 VIM 操作和普通的编辑操作。</p>
+</li>
+<li><p><a href="https://atom.io/packages/emmet" target="_blank" rel="external">emmet</a></p>
+<p>手写 <code>HTML</code> 多少显得专业，但是手写的问题在于得大量的代码。<a href="http://emmet.io/" target="_blank" rel="external">Emmet</a>大幅提升手写的效率。非常值得一装。</p>
+</li>
+<li><p><a href="https://atom.io/packages/go-to-line" target="_blank" rel="external">go-to-line</a>，跳转到指定的行，只要 <code>ctrl + g</code> 后输入行号即可。</p>
+</li>
+</ul>
+<h3 id="Linters"><a href="#Linters" class="headerlink" title="Linters"></a><a href="#Linters" title="Linters"></a>Linters</h3><ul>
+<li><p><a href="https://atom.io/packages/jshint" target="_blank" rel="external">jshint</a>，验证你的 JavaScript ，写更专业的 JavaScript 代码。</p>
+<p><img src="/uploads/atom-jshint.png" alt="JSHint"></p>
+</li>
+<li><p><a href="https://atom.io/packages/csslint" target="_blank" rel="external">csslint</a>， CSSLint 会报告出不合规定的 CSS 规则。</p>
+<p><img src="/uploads/atom-csslint.png" alt="CSSLint"></p>
+</li>
+</ul>
+<h3 id="版本控制类"><a href="#版本控制类" class="headerlink" title="版本控制类"></a><a href="#版本控制类" title="版本控制类"></a>版本控制类</h3><ul>
+<li><p><a href="https://atom.io/packages/git-plus" target="_blank" rel="external">git plus</a>，在 Atom 里面执行 Git 命令，不用来回切换终端和编辑器。</p>
+<p><img src="/uploads/atom-git-plus.gif" alt="git plug"></p>
+</li>
+<li><p><a href="https://atom.io/packages/git-log" target="_blank" rel="external">git-log</a>，在 Atom 里面显示图形化的提交记录。</p>
+</li>
+<li><p><a href="https://atom.io/packages/merge-conflicts" target="_blank" rel="external">merge-conflicts</a>，在 Atom 里面处理合并产生冲突的文件。</p>
+</li>
+</ul>
+<h3 id="辅助类"><a href="#辅助类" class="headerlink" title="辅助类"></a><a href="#辅助类" title="辅助类"></a>辅助类</h3><ul>
+<li><p><a href="https://atom.io/packages/minimap" target="_blank" rel="external">minimap</a>，为 Atom 加上 Sublime Text 的源码预览图，提供丰富的自定义选项，值得一用。</p>
+<p><img src="/uploads/atom-minimap.png" alt="Mini Map"></p>
+</li>
+<li><p><a href="https://atom.io/packages/file-icons" target="_blank" rel="external">file-icons</a>，显示文件类型对应的图标。</p>
+</li>
+<li><p><a href="https://atom.io/packages/atom-beautify" target="_blank" rel="external">atom-beautify</a>，格式化代码，更统一的代码风格。</p>
+</li>
+<li><p><a href="https://atom.io/packages/color-picker" target="_blank" rel="external">Color Picker</a></p>
+<p>在编辑器里面挑选颜色。通过右键选择 <code>Color picker</code> ，或者 <code>cmd + shift + c</code>/<code>ctrl + alt + c</code> 快捷键调出颜色选择面板。支持 <code>HEX, HEXA, RGB, RGBA, HSL, HSLA</code> 形式指定的颜色值。</p>
+</li>
+<li><p><a href="https://atom.io/packages/csscomb" target="_blank" rel="external">csscomb</a>，<a href="http://csscomb.com/" target="_blank" rel="external">CSSComb</a> 的一个扩展工具， CSSComb 帮你写出更漂亮的 CSS ！</p>
+</li>
+<li><p><a href="https://atom.io/packages/autoprefixer" target="_blank" rel="external">autoprefixer</a>，<a href="https://github.com/postcss/autoprefixer" target="_blank" rel="external">AutoPrefix</a>的一个扩展工具，自动为 CSS 属性添加特定的前缀。</p>
+</li>
+<li><p><a href="https://atom.io/packages/localization" target="_blank" rel="external">localization</a>，国际化 Package ，支持简体中文。但是在我使用的版本 <code>0.179.0</code> 中无法使用。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Atom/" rel="tag"># Atom</a>
+          
+            <a href="/tags/编辑器/" rel="tag"># 编辑器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/30/group-picture-test/" rel="next" title="group-picture-test">
+                <i class="fa fa-chevron-left"></i> group-picture-test
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/20/希桅的第一次面试/" rel="prev" title="希桅的第一次面试">
+                希桅的第一次面试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws3.sinaimg.cn/large/006tNbRwgy1fkfnxn54baj3074074q35.jpg"
+                alt="Lavenkin" />
+            
+              <p class="site-author-name" itemprop="name">Lavenkin</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/lavenkin" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="qq:479245760@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Atom-Package"><span class="nav-number">1.</span> <span class="nav-text">安装 Atom Package</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过偏好设置安装-Package"><span class="nav-number">1.1.</span> <span class="nav-text">通过偏好设置安装 Package</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过-apm-命令安装-Package"><span class="nav-number">1.2.</span> <span class="nav-text">通过 apm 命令安装 Package</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Package-推荐"><span class="nav-number">2.</span> <span class="nav-text">Package 推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷输入类"><span class="nav-number">2.1.</span> <span class="nav-text">快捷输入类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linters"><span class="nav-number">2.2.</span> <span class="nav-text">Linters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本控制类"><span class="nav-number">2.3.</span> <span class="nav-text">版本控制类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#辅助类"><span class="nav-number">2.4.</span> <span class="nav-text">辅助类</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lavenkin</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>

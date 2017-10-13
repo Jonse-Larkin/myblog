@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[LaraDock能够帮你在Docker上快速搭建Laravel应用]]></title>
+    <url>%2F2017%2F10%2F13%2FLaraDock%E8%83%BD%E5%A4%9F%E5%B8%AE%E4%BD%A0%E5%9C%A8Docker%E4%B8%8A%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BALaravel%E5%BA%94%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[LaraDock能够帮你在Docker上快速搭建Laravel应用。就像Laravel Homestead一样，但是Docker替换了Vagrant。 介绍大家可以先看官方Laradock_README.md。使用方法很简单，让我们从此再也不需要使用Vagrant了。 特点 在PHP版本：7.0，5.6.5.5…之中可以简单切换。 可选择你最喜欢的数据库引擎，比如：MySQL, Postgres, MariaDB… 可运行自己的软件组合，比如：Memcached, HHVM, Beanstalkd… 所有软件运行在不同的容器之中，比如：PHP-FPM, NGINX, PHP-CLI… 通过简单的编写dockerfile容易定制任何容器。 所有镜像继承自一个官方基础镜像（Trusted base Images） 可预配置Laravel的Nginx环境 容易应用容器中的配置 干净的结构化的Docker配置文件（dockerfile） 最新的Docker Compose 版本（docker-compose） 所有的都是可视化和可编辑的 快速的镜像构建 每周都会有更新… 通过Laradock我们可以很轻松的搭建开发环境，并且可以定制自己环境的需求，并共享出来，例如：nginx的配置环境，如果是团队开发Laradock将会帮助我们省去很多搭环境的工作，并保证大家的环境都是一样的。 DockerDocker 是一个开源项目,自动化部署应用程序软件的容器,在Linux, Mac OS and Windows提供一个额外的抽象层和自动化的操作系统级的虚拟化。这部分内容大家去度娘、谷歌，这里复制官方简介。 开始使用LaraDock安装 1 - 克隆 LaraDock 仓库: A) 如果你已经有一个Laravel项目,克隆这个仓库在到Laravel根目录 1git submodule add https://github.com/LaraDock/laradock.git 如果你不是使用Git管理Laravel项目,您可以使用 git clone 而不是git submodule。 B) 如果你没有一个Laravel项目,你想Docker安装Laravel,克隆这个源在您的机器任何地方上: 1git clone https://github.com/LaraDock/laradock.git 这里我建议使用B方法，全局安装 使用 （这里用mac作为例子） 官方文档有说明如果你正在使用Docker Toolbox (VM)基于VitrulBox创建的实例，建议更新到Docker Native 1 - 运行容器: (在运行docker-compose命令之前，确认你在 laradock 目录中 例子: 运行 NGINX 和 MySQL: 1docker-compose up -d nginx mysql 你可以从以下列表选择你自己的容器组合： nginx, hhvm, php-fpm, mysql, redis, postgres, mariadb, neo4j, mongo, apache2, caddy, memcached, beanstalkd, beanstalkd-console, workspace. 说明: workspace 和 php-fpm 将运行在大部分实例中, 所以不需要在 up 命令中加上它们. 2 - 进入 Workspace 容器, 执行像 (Artisan, Composer, PHPUnit, Gulp, …)等命令 1docker-compose exec workspace bash 增加 --user=laradock (例如 docker-compose exec --user=laradock workspace bash) 作为您的主机的用户创建的文件. (你可以从 docker-compose.yml修改 PUID (User id) 和 PGID (group id) 值 ). 3 - 编辑 Laravel 的配置. 如果你还没有安装Laravel项目，请查看 How to Install Laravel in a Docker Container. 打开 Laravel的 .env 文件 然后 配置 你的mysql的DB_HOST: 1DB_HOST=mysql 注意定义DB_HOST的时候一定要写成mysql,不然无法link到容器 4 - 打开浏览器访问localhost (http://localhost/). 1127.0.0.1 www.youresite.com 建议修改host文件 关于Laradock 使用教程详情可以参考官方文档，这里就介绍到这里，但当你一切都准备好之后你会发现为什么跑起来这么慢，我第一次跑的时候也很纳闷，后来谷歌上查阅了很多资料后发现原来Laradock挂载的工作空间Workspace在docker内置的软虚拟机中，I/O性能很低，这就尴尬了，但幸好有解决的办法，下面介绍下d4m-nfs 安装D4m-nfsd4m-nfs 是docker的一个扩展，通过他可以把docker的file sharing挂载到本地，因为我用的是mac所以这里只介绍mac的挂载方法 Step 1 在Docker中打开Preferences, 点击File Sharing将其它目录全部删掉只保留/tmp目录 Step 2 克隆 d4m-nfs 到 ~目录下 1git clone https://github.com/IFSight/d4m-nfs ~/d4m-nfs Step 3 项目克隆下来后修改~/d4m-nfs/etc/d4m-nfs-mounts.txt文件，若文件不存在自己手动建一个 1234// 文档中加入下面挂载目录/Users:/Users/Volumes:/Volumes/private:/private Step 4 检查系统文件/etc/exports，编辑文件并清空所有内容，cat /etc/exports 1234# d4m-nfs exports&quot;/Users&quot; -alldirs -mapall=0:0 localhost&quot;/Volumes&quot; -alldirs -mapall=0:0 localhost&quot;/private&quot; -alldirs -mapall=0:0 localhost Step 5 在~目录下运行脚本 1~/d4m-nfs/d4m-nfs.sh 脚本运行后程序开始初始化最后终端会展示以下内容 12345678910111213....Please note:* To connect to the D4M moby linux VM use: screen -r d4m* To disconnect from the D4M moby linux VM tty screen session use Ctrl-a d.* To run d4m-nfs faster and/or offline, leave the files in d4m-apk-cache and the hello-world image.* If you switch between D4M stable and beta, you might need to remove files in d4m-apk-cache and the hello-world image.# Use Stable Docker for Mac channelCurrently d4m-nfs is known to work on &apos;Docker version 1.12.3&apos; and does not work on Docker for Mac beta (1.13). Please use the stable channel of Docker for Mac https://docs.docker.com/docker-for-mac/# ionotify for Sublime usersIf you use Sublime, please checkout the plugin by Yves to help with auto reloads on file changes - https://github.com/yvess/sublime_d4m 通过命令进入挂载目录的窗口 1screen -r d4m 如果看到以下挂载项表示挂载成功 1234192.168.65.1:/Users/Lavekin /mnt nfs nolock,local_lock=all 0 0192.168.65.1:/Users /Users nfs nolock,local_lock=all 0 0192.168.65.1:/Volumes /Volumes nfs nolock,local_lock=all 0 0192.168.65.1:/private /private nfs nolock,local_lock=all 0 0 Step 6 回到laradock目录下将你的容器跑起来 123456789docker-compose up -d nginx redis_6379 redis_7000 mysql elasticsearchCreating network &quot;laradock_default&quot; with the default driverCreating laradock_redis_1Creating laradock_applications_1Creating laradock_mysql_1Creating laradock_workspace_1Creating laradock_php-fpm_1Creating laradock_nginx_1 看到以上运行日志恭喜你已将容器跑起来并挂载到本地了]]></content>
+      <tags>
+        <tag>php</tag>
+        <tag>laraver</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[你好]]></title>
+    <url>%2F2017%2F10%2F12%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. 快速开始Create a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>其它</category>
+      </categories>
+      <tags>
+        <tag>server</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用 Travis CI 自动更新 GitHub Pages]]></title>
+    <url>%2F2017%2F03%2F24%2F%E4%BD%BF%E7%94%A8-Travis-CI-%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0-GitHub-Pages%2F</url>
+    <content type="text"><![CDATA[每次更改完 NexT 文档 都要手动部署到 GitHub Pages，重复的次数多了就显得很麻烦，出错的几率也会变大。文档源码放置在 master 分支，最终部署文件在 gh-pages 分支。当在 master 分支更改某些内容之后，通过运行 gulp dist 来生成最终部署的 HTML 文件到 dist 目录，随后再进入 dist 目录初始化 git 仓库、添加文件、提交文件，最后将提交强制推送到远程 gh-pages 分支（因当心我会误将最终部署的 HTML 文件提交到 master 分支导致源码丢失，我在 GitHub 上把 master 分支给锁定了）。除此之外还有另外一个问题：如果 master 分支有 Pull Requests，我需要先将更新取回本地，然后编译更新再提交回远程 gh-pages 分支。 年轻的想法于是，我就想这说将这个过程自动化。首先考虑了使用 GitHub Webhooks，这是 Github 提供的一种机制，使应用能与 Github 通讯。这种机制实际上就是 Pub/Sub，当 Github 监测到资源（如仓库）有变化就往预先设定的 URL 发送一个 POST 请求（Pub），告知变化情况，而后接收变化的服务器（Sub）即可做一些额外的事情。 这个思路需要有一个服务器并启动一个服务来接收 Github 的请求。这里又有种不同的策略，这两种策略都是基于源码放置在 Github 的前提。第一个是源码将最终文档直接部署在这台服务器上（如使用 Nginx），当接收到 Github 通知直接编译更新到服务器指定的文件夹下即可。另一种策略是当服务器接收到通知后编译更新，而后将编译后的版本提交到 Github 仓库的 gh-pages 分支，让 Github 做 Host。 Travis CI 登场由于比较穷，租不起服务器（果然有点年轻），于是就想说有没有免费的方案可以用。于是就惦记起各种 CI 服务，本着够用就好少折腾的原则直接选了 Travis CI，对外宣称是免费的还要求那么多不是太合适，其实本质是读英文文档嫌累π_π。没有折腾精神的开发不是一个好开发，这能怪我么，好吧，确实是我的错，我太穷了。 那么，终归是找到了解决方案。有了持续构建系统，就可以做到有更新自动 Build，意味着就可以多看两集韩国噢八剧，一集英国基情剧，N 集日本爱情剧以及英雄联盟。那么预想的整个流程就是 ： 更新代码到 Github Github 跑去告诉 Travis CI 说有个东西变了 Travis CI 勃然大怒、立马安排 Build Travis CI build 成功后，将输出丢到 Github gh-pages 分支 Github build Pages 领盒饭收工 非常 Easy，哪里不会去 Google！ 那些年的那些坑接下来就是实际动手了。注册 Travis CI，Github 集成 Travis CI ，Travis CI 为特定的仓库变动自动 Build 这些事情就是像个 Boss 一样点点鼠标就行了。问题就在于最后一步，怎么让 Travis CI 往 Github 提交代码呢？将 Github 帐号信息写在 .travis.yml 文件里毕竟是一个太过年轻的做法。然后我找到了 Hexo 作者 SkyArrow的这篇文章，通篇看下来，我长嘘了一口气在想要不就老老实实手动编译更新吧。然而，就在我长嘘短叹人生之艰难的时候，突然发现 Travis CI 除了支持 加密文件 也支持 加密 Token Key。于是，事情有了转机。 另一种方案这种方案不再使用 RSA 加密算法去生成一对密钥，取而代之的是 Github 提供的 Personal Access Token。这个 Token 与 帐号密码 以及 SSH Keys 同样具有 Github 写入能力，因此只要使用 Travis CI 提供的加密工具来加密这个 Token 即可。 方案原理根据 Travis CI 的文档，他会使用一对 Key Pair 中的 Public Key 来加密你提供的 Token 得到一个 Secure Token（这个 Secure Token 可以安全地放置在 .travis.yml 中），而在 Build 的时候他会使用 Private Key 来解密这个 Secure Token 获取最初提供的 Github Personal Access Token，见下图： 具体操作了解了背后的原理就可以大胆地去着手实现。按照原理来讲，大致需要三个步骤，第一获取 GitHub Personal Access Token；第二使用 Travis CI 的工具加密这个 Token，并保存到 .travis.yml 文件中；第三配置文件使用 Access Token。具体的操作步骤如下： 生成一个 Github Personal Access Token。前往 Github 帐号 Settings 页面，在左侧选择 Personal Access Token，然后在右侧面板点击 “Generate new token” 来新建一个 Token。需要注意的是，创建完的 Token 只有第一次可见，之后再访问就无法看见（只能看见他的名称），因此要保存好这个值。 使用 Travis CI 的 命令行工具 加密 GitHub 的 Personal Access Token。这个工具是一个 gem 包，因此需要 Ruby 环境。假设已经安装好 Ruby 环境，即可安装 Travis CI 的命令行工具，以及加密： 12345# 安装 Travis CI 命令行工具gem install travis# 加密 Personal Access Tokentravis encrypt -r iissnan/theme-next-docs GH_TOKEN=XXX 第二条命令中 -r 后的参数是 GitHub 仓库的名字（&lt;用户名&gt;/&lt;仓库名&gt;）；GH_TOKEN 将作为环境变量使用。将这条命令输出的结果复制到 .travis.yml 文件下： 1234env: global: - GH_REF: github.com/iissnan/theme-next-docs.git - secure: “XXXXXX” 这个设置之中包含了 仓库的地址（设置在 GH_REF 环境变量中）以及 Access Token （被加密了，设置在 GH_TOKEN 环境变量中）。这两个环境变量将 Build 的时候被使用，用于往 GitHub gh-pages 分支推送。 让 Travis CI 往 Github 仓库的 gh-pages 分支提交。根据需求的不同，这里的配置也不尽相同，但重要的是如何使用 GH_REF 和 GH_TOKEN 这两个环境变量。NexT 文档是执行 gulp dist 来生成最终的 HTML文件，然后推送到 GitHub Pages，其配置如下： 12345678910111213141516171819# S: Build Lifecycleinstall: - npm installbefore_script: - npm install -g gulpscript: - gulp distafter_script: - cd dist - git init - git config user.name “iissnan” - git config user.email “email_address” - git add . - git commit -m “Update docs” - git push -f “https://$&#123;GH_TOKEN&#125;@$&#123;GH_REF&amp;#125;” master:gh-pages# E: Build LifeCycle 到此，整个流程就结束了。NexT 文档使用的配置在 这里，有需要的可以参考下。]]></content>
+      <tags>
+        <tag>NexT</tag>
+        <tag>技术水波文</tag>
+        <tag>GitHub</tag>
+        <tag>Travis CI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[NexT Documentations Reload]]></title>
+    <url>%2F2016%2F03%2F18%2FNexT-Documentations-Reload%2F</url>
+    <content type="text"><![CDATA[尽管简单易用一直是 NexT 主题的首要目标，但现实与想法总是有那么一个缝隙，难怪有人说诗要源于生活后低于生活，着实有着深刻的哲学道理。那么无论这背后是什么样的原因导致，总结起来就是 NexT 不好用。在初期使用者比较少的情况，还可以有耐心的一个个解答；后来发现一直在回答类似的问题，加上要做和想做的事情太多而无暇顾及，于是就想写一份文档缓和一下这个问题。 前季剧情回顾起先，我使用 Hexo 搭建了第一版的 NexT 使用文档站点。UI 框架选择的是 Semantic UI，并且新建了一个主题称为 Luminosa。然而我发现要在 Markdown 里使用 Semantic UI 的组件有点麻烦，以及 Hexo 在解析 Markdown 时会自动加上很多空行的问题。不得已之下，只能创建了几个 Tag Plugins 封装了一下使用到的 Semantic UI 的组件。 这也就解释了为什么在使用了 Semantic UI 的情况下，整体界面依然如此的粗糙与潦草，因为我把时间都花在写 Plugin 上了。至于文档的质量，早就被忘记在春天的田野里了。夏天是个愉快的季节，毕竟是 Sunshine 与比基尼同在的日子，文档的事情就别提了（我记得有一位热心的用户曾给 Docs 发过一个 PR，我没有 merge，在此说下抱歉）。然而时间就是个无情的戏子，夏天的风景还没看够就火急火燎地带来了秋天。秋天是文人墨客各领风骚的季节，到处是寂寞与沧桑，就在这样一个浮躁的季节里，我回头看了下文档，深刻地意识到只有呵呵能表达我对自己直触灵魂的佩服。 短期计划乱入那么，经过一个工作忙碌周期后得已有些空闲时间，就把最近的空闲时间花在重新制作与编写 NexT 文档。目前的计划是，近期发布一个 Release 出去，版本号从 0.4 直接升级到 5.0.0（紧随 Facebook 大法脚步）。这个 Release 主要包含的是 Pisces Scheme ，修复 Pisces 引入的 Bug 以及更新文档。在此以后应该有一个小的更新，主要解决 Issues 里反馈的 Bug。再下一步是侧栏的重写，以及图片展示（这玩意一直搁着）。短期计划差不多就这样。 文档的重装上阵说回文档。有了第一版的经验，第二版就决定不再使用 Hexo 了。在 Markdown 里写大段的 HTML 代码，干脆就直接写 HTML 代码好了，除了要多写一些结构性标签以外（其实很多），写 HTML 还是比较直接。这样得到的好处是内容层比较好控制后，外观和行为也就没有什么障碍。 第二版选择了 Bootstrap 作为 UI 框架，使用 Nunjucks 模板引擎，Sass 预处理语言以及 Gulp 构建工具。起初技术栈没这么有档次的感觉，我只想好好的写份文档，但到写第三个页面时，实在受不了了每次都要复制头尾相同的文档内容，这万一要改下这公共的内容，那就不能好好的写文档了。 于是就引入了 Nunjucks。而使用一个模板引擎的话，就得解决从模板生成页面的问题，这个问题包括开发过程以及部署代码生成过程。幸运的是，这个问题并不难。使用 Nunjucks 的 API 生成一个 Renderer，而后这个 Renderer 可以用在 BrowserSync 的中间件中以及 Gulp 的部署生成任务中。顺利地解决了模板渲染的问题。所以，文档绝大多数内容都是 HTML 代码，唯一的例外是代码片段。考虑到在 HTML 中书写 HTML 源代码要对大量的 &amp;lt; 以及 &amp;gt; 做转换，所以我增加了一个 code 的标签，用来快速的插入代码片段。 插个广告，安利下 BrowserSync 这个神器，自动刷新、多设备同步、中间件支持、Proxy 支持，真是前端开发必备神器，谁用谁知道。我曾在一个项目中使用 Grunt 做双重 Watcher，第一重 Watcher 用于监听源码的改动并生成预部署的代码；第二重 Watcher 监听预部署的代码并部署代码到应用程序容器下。使用 BrowserSync 后只要一个 Watcher 加 Proxy 即可轻松解决这个场景的需求。自从用了 BrowserSync，感觉一下子年轻了好几岁，爬楼都有劲了（超过时的广告文案）。 大体框架搞定后就是文档内容了。我花了点时间重新润色了下当前已有文档的内容，争取把每一个点都详细的写明，目前仍在继续撰写中（「撰写」这个词很有力度，直接表明了写文档的难度系数极高）。然后发现 NexT 包含了很多特性，有些我也没有在使用。所以如果你有看到有遗漏的不妨访问 NexT 文档发个 Issue，或者 Pull Request 更赞。 .next-documentations-reload-help-button{ ;padding: 0 20px; ;border: 2px solid #555; ;text-decoration: none; ;display: inline-block; ;overflow: hidden; ;color: #555; ;font-size: 14px; ;background: #fff; ;border-radius: 2px; ;transition: all 0.3s ease; } {}.next-documentations-reload-help-button:hover { ;color: white; ;background-color: black; ;border-color: black; } {}.next-documentations-reload-help-button i {margin-right: 5px;} 访问 NexT 文档 NexT 文档源码 最后的最后，请不要在文档仓库提交 NexT 主题相关的 Issue，只接受文档相关内容，蟹蟹。 夜深了，洗洗睡，回头再念叨。]]></content>
+      <tags>
+        <tag>NexT</tag>
+        <tag>Documentations</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[记近期电脑设备升级一事]]></title>
+    <url>%2F2016%2F03%2F16%2F%E8%AE%B0%E8%BF%91%E6%9C%9F%E7%94%B5%E8%84%91%E8%AE%BE%E5%A4%87%E5%8D%87%E7%BA%A7%E4%B8%80%E4%BA%8B%2F</url>
+    <content type="text"><![CDATA[十一月真是一个忙碌的季节，电商平台携商家精心布局撒网等鱼入网，买家手握巨款蠢蠢欲动，物流赶忙提升内容分发系统的高效性与健壮性，一副生机勃勃的画面。作为不怎么热衷购物的我在这番阵势下也激动的跃跃欲试，为了做好热身运动，我提前升级了下电脑设备。那买买买的节奏可谓十分轻快明朗，让人欲罢不能。钱要花在刀刃上，这是我获得的人生的第二条真谛，还挺早获得的，就是执行力不够。我把这个错误归结为冲动的欲望在作祟，但很明显是自我欺骗，显然应该怪商家太会营销打广告。 常话说的好，高富玩表，土豪玩车，屌丝玩电脑。作为一名屌丝中的战斗机，那电脑必须玩得溜。人生真谛第三条，既然决定做一件事情，就把这叫事情做好，无关贫富贵贱，此乃工匠本色。看着那些陪伴多年，依然坚守岗位默默奋斗的电子设备，我想是时候了，是时候来个咸鱼翻身，再扑腾一阵子。 第一件物品 SSD。早有耳闻说 SSD 如何如何的快，快到足够让旧设备重新焕发青春。这对于没有钱买新 MacBook Pro 的我来说，简直是福音。市场上 SSD 产品可谓琳琅满目，各有各的特色，加上各路神仙尽显巧舌之簧，这无疑对作为资深选择困难户的我是一种巨大的挑战。在咖啡提神，两眼放光如狼似虎的地毯式搜索以后，我选定了两个品牌：浦科特与英特尔。为什么选这两个，这其中的细节可以再写一万字，不再赘述。最后，英特尔 战胜了 浦科特，装逼还是得 Intel inside。 就在我为自己的英明抉择佩服不已的时候，剧情发生了 360 ℃ 反转。猴急猴急测试 SSD 性能的时候，我发现我那款 MacBook Pro 只有 SATA 3GbitS，这意味着要降低将近一半的速度在跑。早知如此，何必买那么好的，耽误人家 SSD 的青春。犯下如此低端错误，实在有丢我高端风格的脸，为此我忧伤颓废了 72 小时。为了治愈这直触心灵的创伤，我把注意力转移到了显示器上。 2009 年夏秋交换之时，我买了一台 Dell 22 吋的 UltraSharp 2208WFP。而随后几个月似乎大屏液晶显示器价格开始下滑，尽管如此，我还是觉得当时买这台显示器是很正确的选择。在此之前使用的是那种很笨重的纯平显示器。在点亮 2208 显示器的那一刻，我眼泪禁不住留了下来，这要早点买，说不定我代码就不会写那么差了。不过，后来事实证明，这两者之间没有太大的关系，因为我都用这个显示器去看 火影村忍者的搞基历程 和 王路飞当海贼 的连续剧了。从 17 吋 1024 x 768 的分辨率升级到 22 吋的 1680 x 1050 ，那效果还是相当震撼的。所以，对于购买显示器我已然有一个黄金标准，就是屏幕要大，分辨率要高，其他的不重要（商家就喜欢我这种用户）。 鉴于 2208 仍在服役，我对 Dell 的质量还是很放心，所以这次依然购买了 Dell，型号 U2515H。为了掩饰更高级的买不起的事实，我把 U2515H 的优点放大了 2515 倍，什么字距小容易眨眼之类的描述一概忽略，买的心安理得。只是在 Dell 官网购买的过程有点小波折，那酸爽体验岂是三言两语能言尽。那是一个复古风 2000 年左右的互联网网站。我一路过关斩将、千辛万苦到达付款页面，最后跪在了使用信用卡付款的路上，世上竟然有如此套路复杂的支付招式，在下跪的心服口服。庆幸的是，还有支付宝可以便利地付款，虽然我不用支付宝。 注册帐号，付完款之后发现账户页面找不到任何订单。在 Google Chrome 浏览器下还一直发生“此页面包含循环重定向” 这种不明所以的错误。这种时候，我想到了 IE 浏览器。哎？真的可以哎，原来 IE 除了制造各种疑难杂症，还会治，双 Zhi 齐下。这让我对 IE 的印象完全改观，然后继续用 Google Chrome。至于这个问题背后的黑科技我就暂时忽略了，买台显示器的时候买到后面在查 Bug 显然有点太专业了（代码写的不好看来跟这个态度有关系）。但是，迷之订单迟迟没有出现。 好吧，既然如此，我再等三分钟看看。好吧，既然如此，我就再等三十分钟好吧，既然如此，我就再等三个小时。 好吧…作为一名每天堆砌文字符号兼复制粘贴的软件工作者的我相当的不淡定了，你们这么弄真的好吗？我只是想买一个显示器啊，我为了便宜两百块不上京东买我就错了吗？然后，我收到了邮件，一查原来 Dell 有这种线下销售的模式。被其他电商长期溺宠的我表示很不习惯。订单没法看，物流没法查，那种翘首以待的购物乐趣何在呢？庆幸的是，从下单到收货，只用了三天不到。原来 Dell 是要给我惊喜，呵呵。 到货后，依然猴急的拆箱装上。网上很多拆箱晒照，我想应该有免费的可以借用吧（请尊重原创）。所以那张照片不是我拍的（出处）。迅速接上 MacBook Pro，自带 Mini DisplayPort - DisplayPort 的线正符合条件。可以啊，这下代码水平又能提高不少了，然后点开了 《千与千寻》，真是百看不厌的名作啊…哎？试试 LOL，会不会视野更开阔些，不容易被 Gank 呢？嗯，代码什么的有时间再说吧… 屏幕大了，设备速度快了，然后硬盘容量不够了。一部电影就好几个 G，SSD 那么点容量分分钟被撑爆。听说拆光驱换硬盘这套狸猫换太子的手法可以扩容，我就去淘宝买了一个光驱支架。对于一个为折腾而生的人来说，替换光驱支架那都不是个事。换了以后，把一些只能在三更半夜夜深人静的时候看的东西，果断移到了机械硬盘上。 如此一番，除了荷包渐瘦以外，其他都到位了。那么，热身完毕，就等双十一开战了。战场上见。]]></content>
+      <tags>
+        <tag>叙事高手</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[TIL - Vagrant and Unit testing]]></title>
+    <url>%2F2016%2F03%2F16%2FTIL-Vagrant-and-Unit-testing%2F</url>
+    <content type="text"><![CDATA[今日阅读的文章内容主要包含两个部分，一个是Vagrant，另外一个是JavaScript的单元测试相关的知识。Vagrant的内容涉及两个方面，一篇是如何这只默认Guest机器的默认Shell；另外一篇是问题解决，当我在Guest机器中将系统升级后，出现guest additions不匹配的问题。JavaScript测试那篇文章，主要描述在编写JavaScript单元测试的时候会涉及到的框架，以及使用示例。 Switch to your favorite shell in Vagrant如果有使用Vagrant，并且想在Vagrant box里面使用zsh，这篇文章可以帮你轻松的解决这个问题。文章中举例通过Chef和Puppet来安装，以下代码是通过Chef来安装： 123456# Using Chefpackage ‘zsh’execute “set zsh as default shell” do command “chsh -s $(which zsh) vagrant”end## Vagrant Tip: Sync VirtualBox Guest Additions在将一个Vagrant box从Ubuntu 12.04升级到14.04后，Reload后提示：1The guest additions on this VM do not match the install version of VirtualBox! 文章通过介绍通过安装一个Vagrant Plugin来解决这个问题，简单方便。 Testing in Browsers and Node with Mocha, Chai, Sinon, and Testem写JavaScript测试时，你可能使用到的框架以及框架的使用例子。非常实用。]]></content>
+      <tags>
+        <tag>Reading List</tag>
+        <tag>Vagrant</tag>
+        <tag>Today I Learned</tag>
+        <tag>Unit testing</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[聊聊 NexT 主题]]></title>
+    <url>%2F2015%2F10%2F30%2F%E8%81%8A%E8%81%8A-NexT-%E4%B8%BB%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[NexT 主题 快满一周岁了，值此之际，碎碎念一下（没有干货）。正如我在 V2EX 分享 时的介绍一样，NexT 的前身叫做 Notes。在做 Notes 主题的时候，基于当时的需求出发点，从好听上来讲是简洁，不好听就是简陋（真直接，脸红）。 Notes 开发于我刚接触 Hexo 时。当时我拥有一个基于 WordPress 的独立博客，这个博客主要用来写比较完整的技术类文章。在拖延症与技术挫的主观加客观因素综合作用下，这个独立博客也是产出寥寥。然而在丑小鸭能变美丽天鹅的唯美段子的安利下，我也是每天勤勤恳恳钻研技术（折腾不休）。每日阅读各路教程，搜索各种解决方案，追根溯源探索背后的原理，企图从根本上回答 “我是谁？我从哪里来？我要到哪里去？” 这类哲学问题。 在探索人生真谛的路上，为了防范捡了芝麻丢了西瓜这种愚蠢的问题，我果断想出一个方法，就是找个东西记下来。为了体现出折腾的本性，云记事本那根本不入法眼（要用也得自己开发，哎哟，很屌哦），然后又毙了 WordPress 独立博客，纯粹因为静态博客很火。那么，说好的以记录为主的目的丢到哪去了呢？ 总之，结果是我折腾了 Jekyll、OctoPress，最后落在 Hexo。作为选择困难户在选择静态生成博客的时候能够如此果断，那必然是因为只能选择会用的… 无论如何，使用 Hexo 还是挺顺手的，这里不得不夸下 Hexo 的整个代码设计很赞。但问题是我用了一圈就没一个对的上眼的主题。我要的其实很简单啊（遇到说这种话的客户，请直接拒绝，不要问我为什么），只要显示文章内容就好了啦，不要侧边栏啦，不要社交啦，最好字体好看点，排版优美点，颜色搭配舒服点，整体大气点，访问速度快一点，动画特效多一点。于是就有了 Notes（果然记录什么的这种事情不重要）。 嗯，基本上就长这样，明显我自己还是比较好忽悠的，这没有一个点能匹配的上啊！（竟然只有两个 Release，不思上进也得有个度啊）。那么，Notes 使用了 Jade 作为模板语言，其实还是大量参考了 Hexo 自带主题的模板结构，只是从 EJS 做了一次迁移。模仿是学习一件东西的最好开始（我最喜欢这种美丽的借口）。样式预编译语言是 Stylus，小众，我喜欢，尽管坑不少。Notes 里有几个功能在 NexT 中延续了下来。比如说 程序员 最爱的换代码主题，博主最爱的换主题皮肤（可以考虑学 LOL 做皮肤收费）等等一系列功能（其实也只有这两个）。总的来说，作为先锋，Notes 立下了汗马功劳。 一个突然的深夜，在一顿好生虐待键盘后。我来到了阳台烧起一根香，思考着如果把租用虚拟主机的钱用来抽更好点的烟这个疯狂的 idea。为了证明抽烟也可以省钱这个不切实际的想法，我果断停掉了 WordPress 独立博客。然而，在迁移在 WordPress 上原先那些无聊的文章，烦的把租用主机的费用都抽掉了。而 NexT 便是诞生于此之间。 NexT 在 Notes 的基础上做了大量的改动。首先是使用 Swig 将原先的 Jade 模板完全替换掉，对于记忆力不行还很懒的我来说，使用 Swig 还是比较接近 HTML ，好记易用不费力。 然后无聊企图用 Sass 替换 Stylus 没有成功，所以还是 Stylus 继续耀武扬威。之后，在每一个版本中都加入一些常用的功能，让她更普遍化。 在制作 NexT 的过程中，第一要素是保证其易用性。如果一个功能超级炫丽，但难于使用，那宁可不做（真是漂亮的借口）。这一点可以追溯到偶像诗人白居易，他的诗可以通俗到妇孺皆知，确实有一定手段。那么 NexT 目标亦即如此，谨慎对待自己使用都觉得麻烦的功能。比如说，自定义 Icon Font 这个功能，其实我自己都觉得修改很麻烦，所以一直想把这个功能去除掉（在最近的一个版本中，我终于克服拖延症把它给去掉了）。 偶然一次看到了 苹果广告 视频里那个动画效果，羡慕嫉妒爱，于是就谋划着给 NexT 加上动画特效。本着本土流氓也要有国际黑帮气质的精神，我制作（抄袭）了许多个动画效果，后面都回滚掉了，着实可惜，此处没法装逼，自有装逼处。无论如何，结果是 NexT 加上了一些让浏览器抱怨不堪的动画效果，这完全是 VelocityJS 这个动画库的错。 日子就在花式拖延以及不负责任的抓 七星瓢虫 中悄悄流逝。又是一个凉如水的深夜，我把原先 Notes 中替换皮肤 （Scheme）的功能搬过来，并将其流水线化，利于多套 Scheme 的开发。说到 Scheme，基本原理就是给同一套 HTML 结构应用不同的样式，以达到不同的外观。 结合预编译样式语言，理想情况下，只要更改样式变量即可解锁不同的外观（收费皮肤的基本功）。那为什么不分开做成不同的主题呢？因为那不好玩（这逼装的可以）。贪玩的结果就是，三更半夜还在写作业，这是我获得的第一条人生真谛。由于 Scheme 之间需要共用一些内容，包括 HTML，CSS 以及 JavaScript 这三个闻名于世的贱客。这就需要设计一套良好的机制来降低开发与维护的成本，而这正是 NexT 所欠缺的。所以简单来说，三套 Scheme 加上各自的 Mobile 版本，也就意味着一次修改需要测试六个版本。 然后有了 Mist Scheme。如果不是我错觉，这款皮肤更受欢迎（果然收费皮肤有潜在的市场）。作为 NexT 第一款 Scheme，Mist 还是不负所望，如同夏日傍晚操场吹过的凉风，激起了一片裙子，噢，不是，秀发的飞扬（神马牌主题，宅家写博客常备良品）。 尽管没有一台单反设备，但这并不妨碍我想给 NexT 添加优雅地展示图片的想法。而这个过程一直不顺利，因为在易用性上确实很让人却步。遇到不顺的事情，拖延症就发作这种事情我是不会到处乱说的。就在最近，放着一堆 Bugs 没抓的前提下，我又开坑写了一个新的双栏皮肤（说好的暗色 Scheme 呢）。那么，这款皮肤称为 Pisces，目标是清秀。嗯，只能说这么多了，说太多易食言（其实只想到这么多）。 就念叨到此吧。前路漫漫，后会有期。]]></content>
+      <tags>
+        <tag>NexT</tag>
+        <tag>碎碎念</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ReactJS 快速入门]]></title>
+    <url>%2F2015%2F10%2F30%2FReactJS-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%2F</url>
+    <content type="text"><![CDATA[React 是近期非常热门的一个前端开发框架。 这篇文章将介绍如何使用 React 来创建用户界面，希望能够起到抛砖引玉的效果。 相对于其他框架来说，React 提供了非常少的 API， 如同 Gulp， 越是少量的 API 同时意味着越多的可能性。 正如那句名言所说： Less is more. 但是，精简的 API 不是意味着没有一定的学习成本，我们还是需要对此框架进行一定的理解。 闲话不多说，让我们进入正题。首先，让我们来了解下 React 中使用到的一些术语。 React 术语术语解释React Elements代表 HTML 元素的 JavaScript 对象。 这些 JavaScript 对象最后被编译成对应的 HTML 元素Components封装 React Elements， 包含一个或者多个 React Elements。 Components 用于创建可以复用的 UI 模块，例如 分页，侧栏导航等JSXJSX 是 React 定义的一种 JavaScript 语法扩展，类似于 XML 。 JSX 是可选的， 我们完全可以使用 JavaScript 来编写 React 应用， 不过 JSX 提供了一套更为简便的方式来写 React 应用Virtual DOMVirtual DOM 是一个模拟 DOM 树的 JavaScript 对象。 React 使用 Virtual DOM 来渲染 UI， 同时监听 Virtual DOM 上数据的变化并自动迁移这些变化到 UI 上 DEMO 环境准备首先，在 React Download 页面 下载 Starter Kit，解压到某个地方。 进入到解压后的 build 目录，新建一个 index.html 文件，并且引用 react.js 和 JSXTransformer.js 后就可以开始编写 React 应用了。需要注意如果使用 JSX， 那么 script 标签的 type 应该更改为 text/jsx。 12345678910111213&lt;html&gt; &lt;head&gt; &lt;meta charset=“utf-8” &gt; &lt;title&gt;demo&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;script src=“react.js”&gt;&lt;/script&gt; &lt;script src=“JSXTransformer.js”&gt;&lt;/script&gt; &lt;script type=“text/jsx” src=“app.js”&gt;&lt;/script&gt; &lt;/body&gt;&lt;/html&gt; 第一个 React Element创建一个 Element 只需调用 React.createElement 方法，并传入元素信息即可。例如： 1234var div = React.createElement(‘div’, null, “Hello React”);// 使用 JSXvar div = &lt;div&gt;Hello React&lt;/div&gt; 创建之后就可以调用 React.render 方法渲染到页面上： 1React.render(div, document.body); 第一个 React ComponentReact Component 抽象出相同 UI 组件的结构和逻辑。 通过调用 React.createClass 方法来创建一个 Component，并传入一个带有 render 方法的对象类型的参数。 1234567var HelloMessage = React.createClass(&#123; render: function () &#123; return &lt;div&gt;Hello &#123;this.props.name&#125;&lt;/div&gt;; &#125;&#125;);React.render(&lt;HelloMessage name=“iissnan” /&gt;, document.body); 我们看到 React.createClass 接收了一个对象，并将这个方法返回赋值给 HelloMessage， 最后调用 React.render 方法将这个新建的 Component 渲染到页面上。从这个例子看来，一个 Component 与 Element 并无太大的差别。 事实上， Component 已经准备好了，我们可以增添一些结构和功能来扩展这个 Component 。 Props在上一个例子中，可以看到有一个特殊的引用： this.props.name。 这个引用称之为 Props，可以将他想象成 Component 的设置选项。 在使用上， Props 类似于 HTML 中的属性： 1React.render(&lt;HelloMessage name=“foo” /&gt;, document.body); 在 Component 内部，通过 this.props.name 来引用这个 Props： 12345var HelloMessage = React.createClass(&#123; render: function () &#123; return &lt;div&gt;Hello &#123;this.props.name&#125;&lt;/div&gt;; &#125;&#125;); 需要注意的是， Props 仅用来定制 Component， 这些数据不应该被改动。 如果涉及到需要做改动的数据， 得考虑使用 state。 Stateful ComponentState 数据代表 Component 的状态， 用于维护 Component 内部的状态。 当 State 发生改变之后， React 将会重新渲染 UI 。调用 与 Props 类似， State 数据通过 this.state 访问： 1234567891011121314151617181920212223var Greeting = React.createClass(&#123; getInitialState: function () &#123; return &#123; greeted: false &#125;; &#125;, greet: function () &#123; this.setState(&#123; greeted: true &#125;); &#125;, render: function () &#123; var response = this.state.greeted ? ‘Hi’ : ‘’; return ( &lt;div&gt; &lt;div&gt;Hello &#123;this.props.name&#125;&lt;/div&gt; &lt;span&gt;&#123;response&#125;&lt;/span&gt; &lt;button onClick=&#123;this.greet&#125;&gt;Hi&lt;/button&gt; &lt;/div&gt; ); &#125;&#125;);React.render(&lt;Greeting name=“foo” /&gt;, document.body); 这个例子中加了几个函数，我们一一来看下。 首先是 getInitialState ， 这个方法在 Component 初始化的时候被调用， 返回 Component 初始时的状态数据。例子中，我们设置了 Component 初始时的 greeted 为 false。然后是 greet 方法，这个方法被调用之后将修改状态数据 greeted 为 true。 当 State 发生改变后， React 将 Component 渲染到 Virtual DOM，新的 Virtual DOM 与 旧版本的进行比对，检查出改变的部分并更新浏览器的 DOM。 在这个例子中，当按钮被点击后， greeted状态数据发生了变化，UI 跟随着更新。 组合结合 Props 和 State，我们就可以使用 Component 来创建完整的应用。 1234567891011121314151617181920212223242526272829303132333435var Greeting = React.createClass(&#123; getInitialState: function () &#123; return &#123; greeted: false &#125;; &#125;, greet: function () &#123; this.setState(&#123; greeted: true &#125;); &#125;, render: function () &#123; var response = this.state.greeted ? ‘Hi’ : ‘’; return ( &lt;div&gt; &lt;div&gt;Hello &#123;this.props.name&#125;&lt;/div&gt; &lt;span&gt;&#123;response&#125;&lt;/span&gt; &lt;button onClick=&#123;this.greet&#125;&gt;Hi&lt;/button&gt; &lt;/div&gt; ); &#125;&#125;);var users = [“foo”, “bar”, “baz”];var GreetingApp = React.createClass(&#123; render: function () &#123; var greetings = this.props.users.map(function (user) &#123; return &lt;Greeting name=&#123;user&#125; /&gt;; &#125;); return &lt;div&gt;&#123;greetings&#125;&lt;/div&gt;; &#125;&#125;);React.render(&lt;GreetingApp users=&#123;users&#125; /&gt;, document.body);]]></content>
+      <tags>
+        <tag>React</tag>
+        <tag>Getting Started</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Flipboard - 60 FPS on the mobile web]]></title>
+    <url>%2F2015%2F10%2F27%2FFlipboard-60-FPS-on-the-mobile-web%2F</url>
+    <content type="text"><![CDATA[The DOM is too slow.]]></content>
+      <tags>
+        <tag>收藏链接</tag>
+        <tag>React</tag>
+        <tag>Canvas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[为何使用Jekyll这样的静态编译博客？]]></title>
+    <url>%2F2015%2F10%2F26%2F%E4%B8%BA%E4%BD%95%E4%BD%BF%E7%94%A8Jekyll%E8%BF%99%E6%A0%B7%E7%9A%84%E9%9D%99%E6%80%81%E7%BC%96%E8%AF%91%E5%8D%9A%E5%AE%A2%EF%BC%9F%2F</url>
+    <content type="text"><![CDATA[晚上在 V2EX 看到一个讨论主题：『为什么 Jekyll 这样的静态编译博客能火?』。想到不久之前跟同事讨论过这个主题，当时作为饭后闲谈，聊过即过。今天再看到这个问题，就花了点时间把之前的一些想法写了下来。就以结论来说，我比较偏向使用静态编译博客。 （拍摄于 2015/01/18 - 厦门 福建） 如果是为了纯粹的写作，我觉得那么任何一个提供写作的平台，比如 Medium ，简书 和 新浪博客 都能让你更专注在写作上。 之前看到过一篇段子，说一警察盘问一司机为什么在后备箱装了那么多钱，然后司机想了想说，因为我能。对于使用独立博客的人来说，可能也有我能的这种心里。再加上爱折腾，所以一个新的形式出来被捧红其实不奇怪。 再说到写作方式，实际上我比较偏向静态博客的写作方式。静态博客在本地编辑文件，意味着可以选择你所喜欢的任意一个编辑器来写作，这是在线编辑办不到的，在线你只能使用一个功能有限的编辑器。 然后是存储方式，数据库存储或者文件存储我觉得这本身并不重要，重要的是数据的可管理性和安全性。选择合适的管理软件，我认为文件存储本身并没有太大的问题。静态博客有版本控制软件的助力，在数据管理和安全性上并不会比存储在数据库中差。 然后是速度，在使用静态博客的过程，因为我目前的页面仅有 200 个不到，所以构建速度在我可以接受的范围内。几条简单的命令，设置可以使用 Travis CI 来简化部署的过程，从流程上并不比后台管理麻烦。关键是这种操作过程更多显示的是一个『我能』的信息。Octpress 的宣传口号不就是『A blogging framework for hackers.』，带有很浓的装逼意味。 最后，因为 GitHub Pages 等类似网站提供了免费的托管服务，不用自己掏钱购买VPS或者虚拟主机，不用担心服务器稳定性问题。何乐而不为？]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[AngularJS 应用单元测试起步]]></title>
+    <url>%2F2015%2F10%2F20%2FAngularJS-%E5%BA%94%E7%94%A8%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E8%B5%B7%E6%AD%A5%2F</url>
+    <content type="text"><![CDATA[AngularJS 很重视测试，所以提供了很多特性使得编写测试变得更容易。AngularJS 应用的单元测试与普通的 JavaScript 应用测试有些不同。 AngularJS 应用是以 module（模块）为单位来组织应用，将不同的功能放进各自的模块。测试可以从整个应用级别，或者从特定的模块开始。正是由于测试可以从模块开始，在测试的时候需要指定引用的模块。 AngularJS 应用在启动的时候，会寻找 ng-app 指定的模块，而后创建一个 $rootScope 以及一个管理依赖的 $injector，而后依赖将通过 $injector 自动注入。在测试的时候，需要手动处理这个过程。因为在编写测试的时候，希望的是能够进行单元性的测试，能够针对特定的模块进行测试。所以在编写 AngularJS 测试的时候，我们需要手动去引用某个模块 ，同时手动创建 $rootScope 和手动引入依赖。 AngularJS 提供了 ngModule 这个模块，包含一些方法用来处理这个过程。这个过程主要使用到的是两个方法，分别是 module 以及 inject 方法。前者用于引入模块，后者用于处理依赖。例如： 12345678910111213141516171819describe(‘type: name’, function() &#123; var $scope, myService, $location; // 在每个测试用例执行之前，引用 app 模块 beforeEach(module(‘app’)); // 在每个测试用例执行之前，注入依赖 beforeEach(inject(function($rootScope, myService, $location) &#123; $scope = $rootScope.$new(); myService = myService; $location = $location; &#125;)); it(‘should work’, function() &#123; // Do something // Expect something &#125;);&#125;); 示例代码来自 Angular Tips 有一点要注意的是，在 inject 方法内，有两个参数都有前后的下划线，这个下划线实际上是为了便于编写测试（使得测试内局部变量与依赖一致的名字），AngularJS 会忽略这前后下划线，并找到对应的依赖。]]></content>
+      <tags>
+        <tag>AngularJS</tag>
+        <tag>单元测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[希桅的第一次面试]]></title>
+    <url>%2F2015%2F10%2F20%2F%E5%B8%8C%E6%A1%85%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%9D%A2%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[路上车来车往。“红灯停绿灯行，这个世界能够一致的规则貌似不多”，希桅望着车窗天马行空的想着。 世界需要规则，但同时又不能完全遵行规则。这本身就是一件多么矛盾的事情。中庸之道只是一个结论，这个结论的推进过程估计充斥着各种矛盾的上下波动。时期不同，环境不同，心态不同。同样的条件背景，有人追求本质极致，有人追求无为而治。微观变数聚集而成宏观不变。 希桅是一个乐观主义差不多派，他的乐观也是差不多的。这个时候，他正在车上，去往一场面试。在车上他胡乱的想着一些不着边际的事情，完全没有为接下来的面试考虑。希桅虽然性格优柔寡断，但他有船到桥头自然直，以及抱佛脚不够优雅两个护盾驱使他表现的有那么点从容。 学校的课希桅仅上了开学第一节，领了新书后再没有踏过教室的门。既然闲着也是闲着，于是他决定出去找份工做，今天正是他的第一次面试。与往常一样，他睡到快中午。然后草草地洗过，草草地吃过被忽略的早餐，然后悠然地出发。坐公车对他来说是一件愉快的事情，在公车上他可以无聊地想一些无聊的事情来打发无聊。 准时一词绝对不能用在希桅身上，而今天他意外的提前到了面试的公司。想来，第一次面试对于他来说还是比较重大的。接待他的是一个年轻的女孩，估计二十来岁，给希桅引到一间办公室并倒了杯水就此消失不见。 十月份的这个城市依然到处是短袖短裤。“坐在这带有空调的办公室多少比宿舍吹风扇舒服”，希桅想着，然后对这里产生了那么一丝好感。几分钟后，一位看起来十分年轻的男子出现在会议室，手上拿的就是希桅的简历。穿着看似十分简单，却不乏气质，左手带着一条檀木珠子和一个看上去价格就不菲的手表。 “你还没毕业？” “嗯，今年大四。明年毕业。” 男子眉毛皱了一下，不知道是针对希桅还没有毕业这件事情本身，还是对于他们招聘专员的选择。 “学校应该还有课吧？” “还有，上腻了。” 希桅回答的出乎意料的直接。“听老师为履行职责而在课上念书实在没多少意思。” 听的出来，希桅对于他们学校的教学心存抱怨。初生牛犊不怕虎。 “你觉得你现在的能力可以胜任这份工作吗？” 年轻男子虽然说话柔和，但句句直指问题重点。 “我想可以。” 希桅不知道哪来的自信。 … … “OK。请稍等。” 年轻男子走出会议室，表情依然跟进门时一样的不动声色。持续将近半小时的谈话中，没有涉及任何专业方向的问题。这让希桅有点忐忑。他只能猜测年轻男子是 HR 来安慰自己。 大约三分钟过后，希桅被年轻男子带去另外一间办公室。办公室里坐着一位中年男子。“看上去很有震慑力” 希桅看到中年男子后的第一想法。年轻男子介绍了一下，然后带上门出去了。 “你好” 希桅打开了接下来谈话的开头。这次谈话的范围比刚才的广了许多，希桅还是一如既往的直接。在此之前，他就已经想过，对于像他这种如同白纸的学生，与其畏畏缩缩掩掩捂捂，不如坦荡直接。谈话结束后，希桅对中年的最大印象是他洪亮的声音以及平和语气后那股震慑力。 面试意外的快速并且顺利，他可以选择接下来一周的任何一天去上班，或者说实习。作为还未毕业的希桅来说，这次面试能够如此顺利，很多成分可以归结为对的时间，对的场所。简单来说就是缘分。 面试结束后将近下午四点钟，外面依然热哄哄的。他走出办公楼，伸了个腰，作为面试这一件事告一段落的仪式。他走到十字路口边的公交车站，想着宿舍有几本图书馆借来的书到底超期多久了这个问题。然后，他继续检视身边还有几个类似一直堆积的问题。尽管是小波动，但这对希桅来说他如同站在人生的十字路口旁的公车站。 唯一不同的是，这辆车不知道开往哪里。]]></content>
+      <tags>
+        <tag>叙事高手</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[适用于 WEB 开发者的 Atom 编辑器 Package]]></title>
+    <url>%2F2015%2F10%2F20%2F%E9%80%82%E7%94%A8%E4%BA%8E-WEB-%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-Atom-%E7%BC%96%E8%BE%91%E5%99%A8-Package%2F</url>
+    <content type="text"><![CDATA[这个周末试用 GitHub 的 Atom 编辑器编写一个WEB项目，感觉非常好用。 Atom 的社区很繁荣，有着丰富的扩展/插件（packages）。安装 Atom 的 Package 非常简单，可以在编辑器的偏好设置里面安装，也可以在命令行中使用 apm 命令来安装。 在介绍适用于 WEB 开发的 Package 之前，让我们快速过下如何安装 Atom Packages。 安装 Atom Package通过偏好设置安装 Package使用快捷键 command + ,/ctrl + , 打开偏好设置。点击左侧的 Install 即可浏览线上的 Package 。 顶部是一个搜索框，可以搜索已经发布在 atom.io 上的 Package ；紧接着是 Feature Packages，即精选的 Package ，列出来的是一些比较优质的 Package 。 通过 apm 命令安装 PackageAtom 自带了一个 apm 的 Package 管理工具。我们可以在命令行下执行以下命令来确认 apm 是否已经安装： 1apm help install 命令之后应该输出 apm install 的详细信息。如果输出不是 apm install 的命令信息，打开 Atom 菜单，选择 Install Shell Commands 来安装 atom 和 apm 。 确认 apm 正确安装后，便可以开始安装 Package 。正如上述执行 apm help install 所提示的，安装的命令是： 123apm install [&lt;package_name&gt;…]apm install &lt;package_name&gt;@&lt;package_version&gt;apm install –packages-file my-packages.txt Package 推荐快捷输入类 autocomplete-plus，当输入的时候，提供可能的候选项。 atom-ctags，使用 ctags 来强化自动完成功能，需借助于 autocomplete-plus。 javascript-snippets，顾名思义，输入特殊的字符后自动扩展成对应的代码片段。 vim-mode VIM-Mode 支持在 Atom 中使用 VIM 编辑器的操作方式来编辑。这对我来说是个非常 Killer 的 Package ，在此之前我一直在 WebStorm 上通过一个插件模拟 VIM 操作，异常难用。而在 Atom 上的这个模拟VIM操作，使用起来感觉还是比较顺手的。你可以混合 VIM 操作和普通的编辑操作。 emmet 手写 HTML 多少显得专业，但是手写的问题在于得大量的代码。Emmet大幅提升手写的效率。非常值得一装。 go-to-line，跳转到指定的行，只要 ctrl + g 后输入行号即可。 Linters jshint，验证你的 JavaScript ，写更专业的 JavaScript 代码。 csslint， CSSLint 会报告出不合规定的 CSS 规则。 版本控制类 git plus，在 Atom 里面执行 Git 命令，不用来回切换终端和编辑器。 git-log，在 Atom 里面显示图形化的提交记录。 merge-conflicts，在 Atom 里面处理合并产生冲突的文件。 辅助类 minimap，为 Atom 加上 Sublime Text 的源码预览图，提供丰富的自定义选项，值得一用。 file-icons，显示文件类型对应的图标。 atom-beautify，格式化代码，更统一的代码风格。 Color Picker 在编辑器里面挑选颜色。通过右键选择 Color picker ，或者 cmd + shift + c/ctrl + alt + c 快捷键调出颜色选择面板。支持 HEX, HEXA, RGB, RGBA, HSL, HSLA 形式指定的颜色值。 csscomb，CSSComb 的一个扩展工具， CSSComb 帮你写出更漂亮的 CSS ！ autoprefixer，AutoPrefix的一个扩展工具，自动为 CSS 属性添加特定的前缀。 localization，国际化 Package ，支持简体中文。但是在我使用的版本 0.179.0 中无法使用。]]></content>
+      <tags>
+        <tag>Atom</tag>
+        <tag>编辑器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[group-picture-test]]></title>
+    <url>%2F2015%2F09%2F30%2Fgroup-picture-test%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[关于如何写作的知乎问答]]></title>
+    <url>%2F2015%2F03%2F23%2F%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E5%86%99%E4%BD%9C%E7%9A%84%E7%9F%A5%E4%B9%8E%E9%97%AE%E7%AD%94%2F</url>
+    <content type="text"><![CDATA[如何写出 信手拈来、惊鸿一瞥、深入其境、欲罢不能 等等等等的文章？ 对于新手来讲，写小说要做好哪些准备？ 新手写小说常会陷入哪些误区？ 什么叫做文字的张力？ 如何把人物写得立体？ 如何用 150 字写出一个让人欲罢不能的开头？ 作家都是如何提高构思能力的？ 如何写好一部小说的情色部分？ 怎样才算文笔好？ 怎样提升一个人的文笔？ 写作过程中如何控制节奏？ 如何创作一个多线叙事结构？ 扩展视野，乔老爷的脑洞： 为什么明知道故事是编的，人们还是那么在乎结局？ 怎样将《喜羊羊与灰太狼》写出《冰与火之歌》的感觉？ 有哪些美哭你的句子？ 你看过文笔最美的书是什么？ 如何把平常的事物写出恐怖的感觉？ 集大家之成，悟小家之道。取法乎上，得乎其中。]]></content>
+      <tags>
+        <tag>叙事高手</tag>
+        <tag>写作</tag>
+        <tag>目标叙事高手</tag>
+        <tag>知乎</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[车站]]></title>
+    <url>%2F2015%2F03%2F23%2F%E8%BD%A6%E7%AB%99%2F</url>
+    <content type="text"><![CDATA[希桅的性格是犹豫柔断型的。这一天是周日，他与月杉走在人来人往的车站附近。他们手牵着手漫无目的的走着，周边都是匆匆忙忙赶车的人群。他们缓慢的脚步使得他们与周围人群格格不入。 这已经不记得是第几个他们两人的周末。他们在这个二级城市里念大学，但是两所大学之间还有着将近两个小时的车程。每个周末他们都早早的出来相聚，走遍这个城市中心的每个角落。尽管每次都走上一整天，直到走的脚都麻了，但对于他们来说是幸福无比的。 周日的下午，他们徘徊在车站附近。希桅在这个车站送月衫坐车回学校。在离别的时刻，他们的话开始变少。时间在一秒一秒的流逝，他们的不舍在空气中慢慢的扩散。说回来，这真是一个奇怪的事情，当时间越是有限，他们之间的话语越是稀少，仿佛多说一句话就会将他们的不舍完全的吞噬，于是只能以这种特殊的形式来面对接下来的分离。尽管下周他们依然可以再次见面，但这一周对于他们来说如同一年那么的长久。 在他乡异地，他们相依偎在一起。在他人眼中，他们是再平凡不过的一对情侣。而对于他们来说，对方都是对方的全世界，这气候的他们没有羁绊，如同在广阔草原上的马群，无拘无束。 时间如滴水，暂离的时间来临。月衫回学校的最后一班车终于准备发车。留恋在此刻升华，随着车的越驶越远而加深。 当月衫的车驶离希桅的视线后，希桅转身走出车站，搭车回他的学校。在车上，他们各自开始回忆着这个周末的点点滴滴，如同在回味着刚吃完了的糖果，满满的都是甜味。然后靠着这些余味等待下一个周末的重逢。 尽是如此，如若两颗星星，天各一方，遥遥相望。]]></content>
+      <tags>
+        <tag>叙事高手</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[言轻语长]]></title>
+    <url>%2F2015%2F03%2F23%2F%E8%A8%80%E8%BD%BB%E8%AF%AD%E9%95%BF%2F</url>
+    <content type="text"><![CDATA[当意识再次醒来时，过去如同山崩之流，倾泻而来，将萌芽的光线拖入无尽的黑暗之中。挣脱之后，恍如昨日，一线之隔，南为乾坤，北为虚无。 一把岁月，无尽悲伤，聚散离合皆付风中。不曾相遇，何曾相识；不曾相识，何曾相知；未曾相知，遑论感伤。如若初遇，不如不遇。于世之最大谎言在于问心无愧。 风来雨去，日落月升，蓦然回首时物是人非。虚度彩练当空，徘徊庭树遍绿，长叹夕阳沉暮。不言问心无愧，只许一纸墨迹。 言轻轻待摆渡，语长长候倾听。]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[十年]]></title>
+    <url>%2F2015%2F03%2F23%2F%E5%8D%81%E5%B9%B4%2F</url>
+    <content type="text"><![CDATA[昨日之事已在风中冷却，明天的回忆会不会被忘却？我想在这黑暗的城市上空飞行，看看灯火里别人的故事是否也如此的彷徨？ 千家灯火万家难。望着他人的幸福，徒生向往；注目他人的难处，油然怜悯。他们时而欢笑，时而落泪。因为小事而倍感幸福，因为小事而万分感伤。 那些绽放如花的笑容，那些泪洒如雨的忧伤，都随着时间的流逝或被遗忘，或被掩藏。万物皆无法摆脱时间的摆弄。时间是一个随意的雕刻家，雕塑着一幕幕的喜怒哀乐。 落寞一幕无人视，繁华一曲谁人听。半生浮萍，一世漂泊，肝肠寸断，所为几何？]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[今日阅读列表]]></title>
+    <url>%2F2015%2F03%2F23%2F%E4%BB%8A%E6%97%A5%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[Smashing Magazine - An Introduction To Unit Testing In AngularJS Applications Testing tool stack: Karma - Test runner. Mocha - JavaScript test framework. Chai - Assertion Library. Sinon - Standalone test spies, stubs and mocks for JavaScript.]]></content>
+      <tags>
+        <tag>AngularJS</tag>
+        <tag>Reading List</tag>
+        <tag>Sass</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[今日阅读及笔记]]></title>
+    <url>%2F2015%2F03%2F23%2F%E4%BB%8A%E6%97%A5%E9%98%85%E8%AF%BB%E5%8F%8A%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[阅读的文章：Why I Ditched Angular for React AngularJS被人诟病最多的地方就是性能，学习曲线太陡。 DOM操作因为AngularJS严重依赖于DOM，而DOM的操作是非常昂贵的。AngularJS应用在启动后必须先遍历一边DOM，进行directive的compile，所以需要当一个页面的节点超过一定数量后，这个过程会变成一个痛点。 双向数据绑定双向数据是一把双刃剑，在ECMAScript 5中并未提供原生的数据/对象变化监视。所以，AngularJS采用了一种称为dirty checking的机制来跟踪数据的变化。当在任意一个$scope内更改了数据，Angular将触发了$digest，这个过程会导致性能问题。考虑应用绑定了一定数量的数据，一次$digest的耗时将很可观。 独立的应用循环AngularJS拥有一套自己的应用循环，这就意味着外部的更改必须通过某种方式来通知AngularJS。当与第三方库集成时，必须调用AngularJS的$apply方法，以触发$digest。 ReactJSReact将自己定位在MVC模式的V。React更鼓励适用单向的数据绑定（one-way data flow）。借助于Virtual DOM，React在性能上会显著优于AngularJS。同时作为V，React提供了一个封装component的方式，类似于AngularJS中的directive。 迁移到React?与AngularJS不同，React作为V仅专注在相应层面的实现。举例来说，AnguarJS中提供的模块化，$http/$q、Router等功能，在React中皆没有。但可以接住于其他的库来实现。 附：Quora上一个关于AngularJS和React的详细比对文章]]></content>
+      <tags>
+        <tag>AngularJS</tag>
+        <tag>Reading List</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Karma 快速上手]]></title>
+    <url>%2F2015%2F03%2F18%2FKarma-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%2F</url>
+    <content type="text"><![CDATA[Karma是一个JavaScript test runner。 Test Runner简单来说Test runner就是测试的实施者。很多时候，我们本身也是一个测试实施者。考虑这样一个对于前端开发者很常见的场景： 新建了一个脚本文件，并在这个脚本文件里面写上了一个函数。为了保证这个函数运行如预期，我们下一步是将脚本引用到页面上。紧接着打开浏览器，并查看执行结果。如果运行结果未如预期，我们返回编辑器，修改函数，然后再次运行测试。反复这样一个过程直至验证通过。在此过程中，我们充当的角色即是一个测试实施者。 重复的任务通常都可以自动化。Karma正是一个自动化的测试实施者。 安装KarmaKarma是一个npm模块，安装Karma异常简单。与Grunt相同，karma通常建议作为一个依赖模块安装在本地。然后通过Karma CLI运行。 12345// 安装karma依赖模块npm install karma –save-dev// 全局安装karma clinpm install -g karma-cli 安装Karma CLI之后即可在调用karma来启动测试： 1karma start 如果未安装Karma CLI，则需指定完整的本地karma路径： 1./node_modules/karma/bin/karma start 项目配置不同的项目千差万别，Karma提供了许多配置选项让项目的测试更易进行。配置文件可以通过karma init命令来生成，执行karma init之后，会进入一个交互式的命令行来配置选项。常见的配置，例如测试框架、自动捕捉的浏览器、源文件和测试文件等等。 当配置完成后，即可通过以下命令来启动测试： 1karma start karma.conf.js 一个项目可以设置多个配置文件，给karma start提供不同的文件名即可调用不同的配置： 1karma start another.conf.js PluginsKarma Plugins同样是npm模块，通过npm install来安装插件。例如，安装karma-mocha： 1npm install karma-mocha –save-dev 默认情况下，Karma为自动加载node_modules目录下与karma相邻，并以karma-开头的node模块。此类模块，例如： karma-mocha karma-coverage karma-mocha-reporter karma-phantomjs-launcher 也可以通过配置plugins属性来夹在特定的模块： 1234567891011121314// karma.conf.jsmodule.exports = function (config) &#123; config.set(&#123; // … plugins: [ ‘karma-mocha’, ‘karma-chai’ ] // … &#125;);&#125;;]]></content>
+      <tags>
+        <tag>AngularJS</tag>
+        <tag>Testing</tag>
+        <tag>Karma</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Code and pray]]></title>
+    <url>%2F2015%2F03%2F18%2FCode-and-pray%2F</url>
+    <content type="text"><![CDATA[不久之前，发了条状态感慨说： 害怕风险不该让你成为保守派 越是严肃的产品，对于代码的质量要求越高，因为每一个bug都可能造成客户的不信任甚至客户的流失。这是一个很残酷的事实，如同在一条逆流之上，船只倒退一步，被拉开的距离可能是两步甚至更多。 为了保证质量，从确定需求到最终交付，每一个步骤都夹杂着不少人努力的汗水。而作为产品的负载体，代码的要求更是需要精细的制作。从代码被写下来的前一刻，就开始了各种测试。单元测试，开发测试，QA测试，TA测试。 bug是不可避免的，如同人无完人，但可以最大限度的避免。说来简单，实施起来如同登天。团队成员在具备过硬的技术等硬性条件的同时，还必须专注与激情。而在此条件之下，出现问题情有可原。所以说，在尽力的同时，不应害怕问题而畏首畏尾。总结问题经验，继续前进才是应有的态度，专业的态度。]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+</search>
