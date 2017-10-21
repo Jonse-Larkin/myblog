@@ -256,31 +256,6 @@
   </entry>
   
   <entry>
-    <title>希桅的第一次面试</title>
-    <link href="http://www.lavenkin.com/2015/10/20/%E5%B8%8C%E6%A1%85%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%9D%A2%E8%AF%95/"/>
-    <id>http://www.lavenkin.com/2015/10/20/希桅的第一次面试/</id>
-    <published>2015-10-20T05:33:42.000Z</published>
-    <updated>2017-10-13T02:13:36.229Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;路上车来车往。“红灯停绿灯行，这个世界能够一致的规则貌似不多”，希桅望着车窗天马行空的想着。&lt;/p&gt;
-&lt;p&gt;世界需要规则，但同时又不能完全遵行规则。这本身就是一件多么矛盾的事情。中庸之道只是一个结论，这个结论的推进过程估计充斥着各种矛盾的上下波动。时期不同，环境不同，心态不
-        
-      
-    
-    </summary>
-    
-    
-      <category term="叙事高手" scheme="http://www.lavenkin.com/tags/%E5%8F%99%E4%BA%8B%E9%AB%98%E6%89%8B/"/>
-    
-  </entry>
-  
-  <entry>
     <title>AngularJS 应用单元测试起步</title>
     <link href="http://www.lavenkin.com/2015/10/20/AngularJS-%E5%BA%94%E7%94%A8%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E8%B5%B7%E6%AD%A5/"/>
     <id>http://www.lavenkin.com/2015/10/20/AngularJS-应用单元测试起步/</id>
@@ -304,6 +279,31 @@
       <category term="AngularJS" scheme="http://www.lavenkin.com/tags/AngularJS/"/>
     
       <category term="单元测试" scheme="http://www.lavenkin.com/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>希桅的第一次面试</title>
+    <link href="http://www.lavenkin.com/2015/10/20/%E5%B8%8C%E6%A1%85%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%9D%A2%E8%AF%95/"/>
+    <id>http://www.lavenkin.com/2015/10/20/希桅的第一次面试/</id>
+    <published>2015-10-20T05:33:42.000Z</published>
+    <updated>2017-10-13T02:13:36.229Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;路上车来车往。“红灯停绿灯行，这个世界能够一致的规则貌似不多”，希桅望着车窗天马行空的想着。&lt;/p&gt;
+&lt;p&gt;世界需要规则，但同时又不能完全遵行规则。这本身就是一件多么矛盾的事情。中庸之道只是一个结论，这个结论的推进过程估计充斥着各种矛盾的上下波动。时期不同，环境不同，心态不
+        
+      
+    
+    </summary>
+    
+    
+      <category term="叙事高手" scheme="http://www.lavenkin.com/tags/%E5%8F%99%E4%BA%8B%E9%AB%98%E6%89%8B/"/>
     
   </entry>
   
@@ -518,9 +518,9 @@
   </entry>
   
   <entry>
-    <title>Karma 快速上手</title>
-    <link href="http://www.lavenkin.com/2015/03/18/Karma-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"/>
-    <id>http://www.lavenkin.com/2015/03/18/Karma-快速上手/</id>
+    <title>Code and pray</title>
+    <link href="http://www.lavenkin.com/2015/03/18/Code-and-pray/"/>
+    <id>http://www.lavenkin.com/2015/03/18/Code-and-pray/</id>
     <published>2015-03-18T05:13:56.000Z</published>
     <updated>2017-10-13T02:13:36.229Z</updated>
     
@@ -530,19 +530,18 @@
       
         
         
-          &lt;p&gt;&lt;a href=&quot;http://karma-runner.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Karma&lt;/a&gt;是一个JavaScript test runner。&lt;/p&gt;
-&lt;h2 id=&quot;Test-Runner&quot;&gt;&lt;a
+          &lt;p&gt;不久之前，发了条状态感慨说：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;害怕风险不该让你成为保守派&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;越是严肃的产品，对于代码的质量要求越高，因为每一个bug都可能造成客户的不信任甚至客户的流失。这是一个很残酷的事实，如同在一条逆流之上
         
       
     
     </summary>
     
     
-      <category term="AngularJS" scheme="http://www.lavenkin.com/tags/AngularJS/"/>
-    
-      <category term="Testing" scheme="http://www.lavenkin.com/tags/Testing/"/>
-    
-      <category term="Karma" scheme="http://www.lavenkin.com/tags/Karma/"/>
+      <category term="随笔" scheme="http://www.lavenkin.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
